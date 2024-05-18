@@ -1,11 +1,28 @@
 import React from "react";
 
-function Task() {
+function Task({ task, onDelete, selectedCategory }) {
+  const { id, text, category } = task;
+
+  const handleDelete = () => {
+    onDelete(id);
+  };
+
+  const isSelected = () => {
+
+    if (selectedCategory === "All") {
+
+      return true;
+
+    }
+
+    return selectedCategory === category;
+
+  };
   return (
-    <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+    <div className={`task ${isSelected() ? "selected" : ""}`}>
+      <div className="label">{category}</div>
+      <div className="text">{text}</div>
+      <button className="delete" onClick={handleDelete}>X</button>
     </div>
   );
 }
